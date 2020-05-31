@@ -4,6 +4,7 @@ namespace LaraAreaSupport;
 
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
 
 class LaraAreaServiceProvider extends ServiceProvider
 {
@@ -206,7 +207,7 @@ class LaraAreaServiceProvider extends ServiceProvider
      */
     protected function getPackage($rootPath)
     {
-        $path = str_replace_last(DIRECTORY_SEPARATOR, '', $this->getPackagePath($rootPath));
+        $path = Str::replaceLast(DIRECTORY_SEPARATOR, '', $this->getPackagePath($rootPath));
         $parts = explode(DIRECTORY_SEPARATOR, $path);
         return last($parts);
     }
@@ -217,7 +218,7 @@ class LaraAreaServiceProvider extends ServiceProvider
      */
     protected function getPackagePath($rootPath)
     {
-        return Str::before($rootPath, 'src', 1);
+        return Str::before($rootPath, 'src');
     }
 
     /**

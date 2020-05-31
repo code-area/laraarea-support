@@ -149,7 +149,7 @@ class LaraAreaDB
                 'is_nullable' => $column->Null == 'YES' ? true : false,
                 'default' => $column->Default,
                 'extra' => $column->Extra,
-                'unsigned' => str_contains($column->Type, 'unsigned') ? true : false,
+                'unsigned' => \Illuminate\Support\Str::contains($column->Type, 'unsigned') ? true : false,
                 'full_info' => $column->Type,
             ];
             if (Str::between($column->Type, '(', ')') != $column->Type) {
@@ -181,7 +181,7 @@ class LaraAreaDB
                 'is_nullable' => $dbStructure->IS_NULLABLE == 'YES' ? true : false,
                 'default' => $dbStructure->COLUMN_DEFAULT,
                 'extra' => $dbStructure->EXTRA,
-                'unsigned' => str_contains($dbStructure->COLUMN_TYPE, 'unsigned') ? true : false,
+                'unsigned' => \Illuminate\Support\Str::contains($dbStructure->COLUMN_TYPE, 'unsigned') ? true : false,
                 'column_type' => $dbStructure->COLUMN_TYPE,
                 'comment' => $dbStructure->COLUMN_COMMENT,
                 'key' => $dbStructure->COLUMN_KEY,
@@ -191,6 +191,6 @@ class LaraAreaDB
             }
         }
 
-        return $tables;
+        return collect($tables);
     }
 }
